@@ -71,6 +71,7 @@ class _PomodoroTimerWidgetState extends State<PomodoroTimerWidget> {
     double remainingMillisec =
         (maxMillisec - elapsedMillisec) / 60000.toDouble();
     return Card(
+      color: Theme.of(context).primaryColor,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -78,22 +79,56 @@ class _PomodoroTimerWidgetState extends State<PomodoroTimerWidget> {
           children: [
             Text(
               "Aufgabe",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+              style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor,
+                fontSize: 18,
+                fontWeight: FontWeight.w200,
+              ),
             ),
             Text(
               widget.title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
               textAlign: TextAlign.center,
             ),
             Text(
               "${_doubleToMin(remainingMillisec)} Min ${_doubleToSec(remainingMillisec)} Sek",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: _startTimer, child: Text("Start")),
-                OutlinedButton(onPressed: _stopTimer, child: Text("Stop")),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(
+                      Theme.of(context).primaryColorDark,
+                    ),
+                    foregroundColor: WidgetStatePropertyAll(
+                      Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
+                  onPressed: _startTimer,
+                  child: Text("Start"),
+                ),
+                OutlinedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(
+                      Theme.of(context).primaryColorDark,
+                    ),
+                    foregroundColor: WidgetStatePropertyAll(
+                      Theme.of(context).secondaryHeaderColor,
+                    ),
+                  ),
+                  onPressed: _stopTimer,
+                  child: Text("Stop"),
+                ),
               ],
             ),
           ],
