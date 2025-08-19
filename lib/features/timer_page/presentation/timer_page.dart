@@ -8,6 +8,7 @@ import "package:audioplayers/audioplayers.dart";
 // ignore: must_be_immutable
 class TimerPage extends StatefulWidget {
   DatabaseRepo db;
+
   TimerPage({super.key, required this.db});
 
   @override
@@ -26,6 +27,7 @@ class _TimerPageState extends State<TimerPage> {
   @override
   Widget build(BuildContext context) {
     const String title = "Pomodoro Timer UI";
+
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: Padding(
@@ -34,8 +36,8 @@ class _TimerPageState extends State<TimerPage> {
           spacing: 16,
           children: [
             PomodoroTimerWidget(
-              time: widget.db.readTimeFromIndex(0) ?? 0,
-              title: widget.db.readTaskTitleFromIndex(0) ?? "",
+              time: widget.db.readTimeFromIndex(0)!,
+              title: widget.db.readTaskTitleFromIndex(0)!,
               onFinished: () {
                 _playAudio();
                 showDialog(
@@ -52,6 +54,7 @@ class _TimerPageState extends State<TimerPage> {
                           onPressed: () {
                             setState(() {
                               widget.db.deleteTask(0);
+                              widget.db.writeTasks();
                             });
                             Navigator.pop(context);
                           },
@@ -64,6 +67,7 @@ class _TimerPageState extends State<TimerPage> {
                                 0,
                                 Task(taskTitle: "Pause", timeMin: 5),
                               );
+                              widget.db.writeTasks();
                             });
                             Navigator.pop(context);
                           },
@@ -79,8 +83,7 @@ class _TimerPageState extends State<TimerPage> {
               "ToDo Liste",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              height: 415,
+            Expanded(
               child: ListView.builder(
                 itemCount: widget.db.readTasks().length,
                 itemBuilder: (context, index) {
@@ -117,7 +120,7 @@ class _TimerPageState extends State<TimerPage> {
               builder: (context) => AddPage(
                 onAdd: (Task t) {
                   setState(() {
-                    widget.db.createTask(t);
+                    widget.db.writeTask(t);
                   });
                 },
               ),

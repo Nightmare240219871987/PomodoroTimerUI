@@ -5,18 +5,13 @@ class MockDatabase extends DatabaseRepo {
   final List<Task> _tasks = [];
 
   @override
-  void createTask(Task t) {
+  Future<void> writeTask(Task t) async {
     _tasks.add(t);
   }
 
   @override
-  void deleteTask(int index) {
+  Future<void> deleteTask(int index) async {
     _tasks.removeAt(index);
-  }
-
-  @override
-  Task readTask(int index) {
-    return _tasks.elementAt(index);
   }
 
   @override
@@ -38,5 +33,20 @@ class MockDatabase extends DatabaseRepo {
       return 0;
     }
     return _tasks.elementAt(index).timeMin;
+  }
+
+  @override
+  void initDb() {
+    // TODO: implement initDb
+  }
+
+  @override
+  void closeDB() {
+    // TODO: implement closeDB
+  }
+
+  @override
+  void writeTasks() {
+    // TODO: implement writeTasks
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer_ui/common/task.dart';
-import 'package:pomodoro_timer_ui/data/database_repo.dart';
 
 // ignore: must_be_immutable
 class AddPage extends StatefulWidget {
-  void Function(Task)? onAdd = null;
+  void Function(Task)? onAdd;
   AddPage({super.key, this.onAdd});
 
   @override
@@ -13,11 +12,8 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   final TextEditingController taskTitleCtrl = TextEditingController();
-
   final TextEditingController timeMinCtrl = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

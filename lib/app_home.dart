@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer_ui/data/database_repo.dart';
-import 'package:pomodoro_timer_ui/data/mock_database.dart';
+import 'package:pomodoro_timer_ui/data/sqlite3_database.dart';
 import 'package:pomodoro_timer_ui/features/timer_page/presentation/timer_page.dart';
 import 'package:pomodoro_timer_ui/themes/theme.dart';
 
@@ -9,7 +9,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DatabaseRepo db = MockDatabase();
+    DatabaseRepo db = Sqlite3Database();
+    db.initDb();
     return MaterialApp(
       title: "Pomodoro Timer UI",
       theme: lightMode,
