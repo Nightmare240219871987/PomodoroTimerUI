@@ -1,5 +1,5 @@
 name: pomodoro_timer_ui
-description: "A new Flutter project."
+description: "a Pomodoro Timer App"
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audioplayers: ^6.5.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
   sqlite3: ^2.9.0
+  sqlite3_flutter_libs: ^0.5.39
 
 dev_dependencies:
   flutter_test:
@@ -19,5 +21,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/tones/
