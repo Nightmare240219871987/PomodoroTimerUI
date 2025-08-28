@@ -9,6 +9,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Pomodoro Timer",
       home: LandingPage(db: db, currentIndex: 0),
     );
