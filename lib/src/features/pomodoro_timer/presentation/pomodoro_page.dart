@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer_ui/src/common/task.dart';
 import 'package:pomodoro_timer_ui/src/data/database_repository.dart';
@@ -16,10 +18,21 @@ class PomodoroTimer extends StatefulWidget {
 
 class _PomodoroTimerState extends State<PomodoroTimer> {
   AudioPlayer player = AudioPlayer();
+  Timer? refreshTimer;
 
   Future<void> playSound() async {
     player.setVolume(1);
     await player.play(AssetSource("audio/bell.wav"));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    refreshTimer = Timer.periodic(Duration(milliseconds: 500), _run);
+  }
+
+  _run(Timer t) {
+    setState(() {});
   }
 
   @override

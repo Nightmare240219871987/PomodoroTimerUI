@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer_ui/src/common/task.dart';
 import 'package:pomodoro_timer_ui/src/data/database_repository.dart';
@@ -15,6 +17,17 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
+  Timer? refreshTimer;
+  @override
+  void initState() {
+    super.initState();
+    refreshTimer = Timer.periodic(Duration(milliseconds: 500), _run);
+  }
+
+  _run(Timer t) {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
