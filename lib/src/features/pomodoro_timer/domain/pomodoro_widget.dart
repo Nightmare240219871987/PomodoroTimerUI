@@ -86,7 +86,20 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
   }
 
   @override
+  void dispose() {
+    if (_timer != _timer) {
+      _timer!.cancel();
+      _timer = null;
+    }
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!_isRunning) {
+      _runningTime = widget.time;
+    }
     return Column(
       spacing: 6.0,
       mainAxisAlignment: MainAxisAlignment.center,

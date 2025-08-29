@@ -42,43 +42,51 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
                   : "",
               onFinished: () async {
                 await playSound();
-                showDialog<void>(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("abgeschlossen ?"),
-                      content: Text("Wurde der Tasks abgeschlossen ?"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              widget.db.insertTask(
-                                0,
-                                Task(title: "Pause", time: 5),
-                              );
-                            });
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Nein"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              widget.db.removeTask(0);
-                            });
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Ja"),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                if (mounted) {
+                  showDialog<void>(
+                    // ignore: use_build_context_synchronously
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("abgeschlossen ?"),
+                        content: Text("Wurde der Tasks abgeschlossen ?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.db.insertTask(
+                                  0,
+                                  Task(title: "Pause", time: 5),
+                                );
+                              });
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Nein"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.db.removeTask(0);
+                              });
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Ja"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
             ),
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

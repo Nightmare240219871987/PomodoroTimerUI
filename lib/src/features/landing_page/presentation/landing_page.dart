@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer_ui/src/common/task.dart';
 import 'package:pomodoro_timer_ui/src/data/database_repository.dart';
-import 'package:pomodoro_timer_ui/src/features/pomodoro_timer/presentation/pomodoro_timer.dart';
+import 'package:pomodoro_timer_ui/src/features/pomodoro_timer/presentation/pomodoro_page.dart';
 import 'package:pomodoro_timer_ui/src/features/tasks/presentation/add_task.dart';
 import 'package:pomodoro_timer_ui/src/features/tasks/presentation/tasks.dart';
 
@@ -31,7 +31,8 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[widget.currentIndex],
+      body: IndexedStack(index: widget.currentIndex, children: _screens),
+
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {
           setState(() {
